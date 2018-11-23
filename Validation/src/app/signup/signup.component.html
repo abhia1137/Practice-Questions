@@ -1,0 +1,109 @@
+<!-- 
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+<div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+        <form [formGroup]="signUpForm" (ngSubmit)="registerUser()" submitted novalidate>
+            <div class="form-group">
+                <label for="name">Name </label>
+                <input size="50" formControlName="name" class="form-control" type="text">
+                <span class="alert alert-danger" *ngIf="!signUpForm.get('name').valid && signUpForm.get('name').touched">
+                    <span class="alert alert-danger" *ngIf="signUpForm.get('name').errors['pattern']">Enter valid Name</span>
+                    <span class="alert alert-danger" *ngIf="signUpForm.get('name').errors['required']">Enter the Name First</span>
+                </span>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="username">Username </label>
+                <input formControlName="username" class="form-control" type="text">
+                <span class="alert alert-danger" *ngIf="!signUpForm.get('username').valid && signUpForm.get('username').touched">
+                    <span class="alert alert-danger" *ngIf="signUpForm.get('username').errors['pattern']">Enter valid Username</span>
+                    <span class="alert alert-danger" *ngIf="signUpForm.get('username').errors['required']">Enter the Username First</span>
+                    <span class="alert alert-danger" *ngIf="signUpForm.get('username').errors?.minlength">Enter the username of min length 8</span>
+                </span>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="email">Email </label>
+                <input formControlName="email" class="form-control" type="text">
+                <span class="alert alert-danger" *ngIf="!signUpForm.get('email').valid && signUpForm.get('email').touched">
+                    <span class="alert alert-danger" *ngIf="signUpForm.get('email').errors['pattern']">Enter valid Email</span>
+                    <span class="alert alert-danger" *ngIf="signUpForm.get('email').errors['required']">Enter the Email First</span>
+                </span>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="pincode">Pincode </label>
+                <input formControlName="pincode" class="form-control" type="text">
+                <span class="alert alert-danger" *ngIf="!signUpForm.get('pincode').valid && signUpForm.get('pincode').touched">
+                    <span class="alert alert-danger" *ngIf="signUpForm.get('pincode').errors['pattern']">Enter valid Pincode</span>
+                    <span class="alert alert-danger" *ngIf="signUpForm.get('pincode').errors['required']">Enter the Pincode first</span>
+                </span>
+            </div>
+            <br>
+            <!-- <div class="form-group">
+        <label for="address">Address</label>
+        <input size="50" formControlName="address" class="form-control" type="text">
+        <span class = "alert alert-danger" *ngIf="!signUpForm.get('address').valid && signUpForm.get('address').touched">
+          <span class = "alert alert-danger" *ngIf="signUpForm.get('address').errors['pattern']">Enter valid Address</span>
+          <span class = "alert alert-danger" *ngIf="signUpForm.get('address').errors['required']">Enter the Address First</span>
+        </span>        
+    </div> -->
+            <div class="form-group">
+                <label>Address</label>
+                <ng-container formArrayName="addresses">
+                    <ng-container *ngFor="let address of signUpForm.get('addresses').controls; index as i" [formGroupName]="i">
+
+                        <input class="form-control" name="address" formControlName="address" type="text">
+                        <button *ngIf="i>0" (click)="deleteRow(i)" class="btn btn-danger">-</button>
+                        <br>
+                        <div class="alert alert-danger" *ngIf="!signUpForm.controls['addresses'].valid && signUpForm.controls['addresses'].touched">Enter Address</div>
+                        <span class="alert alert-danger" *ngIf="signUpForm.controls['addresses'].hasError('required')">Enter the Address</span>
+                    </ng-container>
+
+                    <button type="button" (click)="addNewRow()">+</button>
+                </ng-container>
+
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="password">Password </label>
+                <input formControlName="password" class="form-control" type="password">
+                <span class="alert alert-danger" *ngIf="!signUpForm.get('password').valid && signUpForm.get('password').touched">
+                    <span class="alert alert-danger" *ngIf="signUpForm.get('password').errors['pattern']">Enter valid Password</span>
+                    <span class="alert alert-danger" *ngIf="signUpForm.get('password').errors['required']">Enter the Password first</span>
+                </span>
+                <p>(Must contain 1 Special character,1 lower,1 upper,1 number and length of 8 to 15)</p>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password </label>
+                <input formControlName="confirmPassword" class="form-control" type="password">
+                <span class="alert alert-danger" *ngIf="!signUpForm.get('confirmPassword').valid && signUpForm.get('confirmPassword').touched">
+                    <span *ngIf="signUpForm.get('confirmPassword').touched && signUpForm.get('confirmPassword').errors?.MatchPassword" class="alert alert-danger">Password not matched</span>
+                </span>
+            </div>
+            <br>
+            <div class="checkbox">
+                <label for="myClick">
+                    <input type="checkbox" name="myClick" (change)="changeEvent($event)"> Accept Terms and Conditions</label>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="username">Image</label>
+                <input size="10" accept="image/*" formControlName="image1" type="file" (change)="handleFileSelect1($event)">
+                <img src="{{cover1}}" height="50">
+                <span class="alert alert-danger" *ngIf="signUpForm.controls.image1.hasError('required')">Choose Image</span>
+                <span class="alert alert-danger" *ngIf="signUpForm.get('image1').hasError['required']">Enter the Password first</span>
+            </div>
+            <div class="col-md-12 form-group text-center">
+
+                <button style="cursor:pointer" type="submit" class="btn btn-primary " [disabled]=" !signUpForm.valid &&  !svalid ">SignUp</button>
+            </div>
+        </form>
+
+    </div>
+</div>

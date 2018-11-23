@@ -1,0 +1,150 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<div class="container">
+  <div class="row">
+    <button class="btn btn-default  btn-lg"  (click)="addProduct()">Add Data</button>
+
+    <table class="table">
+      <!-- <thead class="thead-inverse"> -->
+      <tr>
+        <th class="text-center">S.No.</th>
+        <th class="text-center">ID</th>
+        <th class="text-center">Title</th>
+        <!-- <th class="text-center">Body</th> -->
+      </tr>
+      <!-- </thead> -->
+      <tbody>
+      <tr *ngFor="let post of dataArray; let i=index "  >
+        <td  class="text-center" style="width: 15px;">{{i+1}}</td>
+        <td class="text-center" style="width: 15px;">{{post.id}}</td>
+        <td class="text-center" style="width: 600px;">{{post.title}}</td>
+        <!-- <td class="text-center">{{post.body}}</td> -->
+        <td><button class="btn btn-default " style="width: 75px" (click)="viewData(i)"> View</button></td>
+        <td><button (click)="openUpdate(i)" class="btn btn-default">Update</button></td>
+        <td><button  class="btn btn-danger" (click)="deleteData(i)"> Delete</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div> 
+</div>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<div class="w3-container">
+
+  <div id="update" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:400px">
+      <form class="w3-container" [formGroup]='updateProduct' (ngSubmit)='onUpdateProduct()'>
+        <div class="w3-section">
+          <label>
+            <b>ID</b>
+          </label>
+          <input size="10" formControlName="id" class="form-control" type="number">
+          <span class = "alert alert-danger" *ngIf="!updateProduct.get('id').valid && updateProduct.get('id').touched">
+            <span class = "alert alert-danger" *ngIf="updateProduct.get('id').errors['pattern'] ">Enter valid id</span>
+            <span class = "alert alert-danger" *ngIf="updateProduct.get('id').errors['required']">Enter the id first</span>
+          </span>   
+          <label>
+            <b>Title</b>
+          </label>
+          <input size="10" formControlName="title" class="form-control" type="text">
+          <span class = "alert alert-danger" *ngIf="!updateProduct.get('title').valid && updateProduct.get('title').touched">
+            
+            <span class = "alert alert-danger" *ngIf="updateProduct.get('title').errors['required']">Enter the title first</span>
+          </span>   
+          <label>
+            <b>body</b>
+          </label>
+          <input size="10" formControlName="body" class="form-control" type="text">
+          <span class = "alert alert-danger" *ngIf="!updateProduct.get('body').valid && updateProduct.get('body').touched">
+            
+            <span class = "alert alert-danger" *ngIf="updateProduct.get('body').errors['required']">Enter the body first</span>
+          </span> 
+          <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit"  [disabled]="!updateProduct.valid">Update</button>
+        </div>
+      </form>
+      <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+        <button onclick="document.getElementById('update').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<div class="w3-container">
+
+  <div id="view" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:400px">
+      <form class="w3-container" [formGroup]='viewProduct'>
+        <div class="w3-section">
+          <label>
+            <b>ID</b>
+          </label>
+          <input size="10" formControlName="id" class="form-control" type="number">
+          <label>
+            <b>Title</b>
+          </label>
+          <input formControlName="title" class="form-control" type="text">
+           
+         
+          <label>
+            <b>body</b>
+          </label>
+          <input size="10" formControlName="body" class="form-control" type="text">
+        </div>
+      </form>
+      <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+        <button onclick="document.getElementById('view').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<div class="w3-container">
+
+  <div id="Add" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:400px">
+      <form class="w3-container" [formGroup]='AddProduct' (ngSubmit)='onAddProduct()'>
+        <div class="w3-section">
+          <label>
+            <b>ID</b>
+          </label>
+          <input size="10" formControlName="id" class="form-control" type="number">
+          <span class = "alert alert-danger" *ngIf="!AddProduct.get('id').valid && AddProduct.get('id').touched">
+            <span class = "alert alert-danger" *ngIf="AddProduct.get('id').errors['pattern']">Enter valid id</span>
+            <span class = "alert alert-danger" *ngIf="AddProduct.get('id').errors['required']">Enter the id first</span>
+          </span>
+          <label>
+            <b>Title</b>
+          </label>
+          <input size="10" formControlName="title" class="form-control" type="text">
+          <span class = "alert alert-danger" *ngIf="!AddProduct.get('title').valid && AddProduct.get('title').touched">
+            
+            <span class = "alert alert-danger" *ngIf="AddProduct.get('title').errors['required']">Enter the title first</span>
+          </span> 
+          <label>
+            <b>body</b>
+          </label>
+          <input size="10" formControlName="body" class="form-control" type="text">
+          <span class = "alert alert-danger" *ngIf="!AddProduct.get('body').valid && AddProduct.get('body').touched">
+            
+            <span class = "alert alert-danger" *ngIf="AddProduct.get('body').errors['required']">Enter the body first</span>
+          </span> 
+          <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit" [disabled]="!AddProduct.valid">Add</button>
+        </div>
+      </form>
+      <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+        <button onclick="document.getElementById('Add').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
