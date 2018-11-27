@@ -11,10 +11,11 @@
 
 
 function cyclicArrayRotation(arr, d) {
-    let newArray = []
-    for (let i = 0; i <= d - 1; i++) {
-        newArray.push(arr[arr.length - 1])
-        arr.splice(arr.length - 1, 1)
+    let newArray =[]
+    for (let i = 0; i < d; i++) {
+
+        newArray.push(arr[arr.length - d + i])
+        arr.splice(arr.length - d + i, 1)
     }
     console.log(newArray.concat(arr))
 }
