@@ -1,0 +1,5 @@
+function GeneratingLyndon() {
+
+}
+
+GeneratingLyndon([])
