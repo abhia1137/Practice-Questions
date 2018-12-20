@@ -1,0 +1,47 @@
+activityNotifications([10, 20, 30, 40, 50], 3)
+
+function activityNotifications(arr, d) {
+    let notification = 0
+    let newArray = arr
+    let median = 0
+    let subArray = []
+    let i=0
+
+    calculate(newArray, d)
+   
+    function calculate(newArray, d)  {
+        i++
+        subArray = newArray.slice(0, d);
+      
+           if (newArray[d + 1] >= 2 * medianr(subArray)) {
+          
+            notification++
+             
+             subArray = []
+             newArray.splice(0,1)  
+       }else{
+        newArray.splice(0,1)  
+       }
+       if(i<newArray.length-1){
+ 
+        calculate(newArray, d)
+     }
+     }
+
+
+    function medianr(arr) {
+        if (arr.length % 2 == 1) {
+            median = Math.round(arr[(arr.length % 2)])
+
+            return median
+        } else {
+            median = arr[arr.length / 2] + arr[(arr.length / 2) - 1]
+
+            median = median / 2
+            return median
+        }
+    }
+    
+    // console.log(notification)
+    return notification
+}
