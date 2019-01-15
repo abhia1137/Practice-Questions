@@ -1,0 +1,28 @@
+let newStr = s.split('')
+    let char = []
+    let number = []
+    for (let i = 0; i < newStr.length; i++) {
+        if (char.indexOf(newStr[i]) == -1) {
+            char.push(newStr[i])
+            number.push(1)
+        } else {
+            number[char.indexOf(newStr[i])]++
+        }
+    }
+
+    let mynumber = number[0]
+    let count1 = 0
+    for (let i = 0; i < number.length; i++) {
+        if (mynumber != number[i]) {
+            count1++
+
+        }
+    }
+
+    if (count1 > 1) {
+        return 'NO'
+        console.log('NO')
+    } else {
+        return 'YES'
+        console.log('YES')
+    }
