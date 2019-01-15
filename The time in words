@@ -1,0 +1,56 @@
+function timeInWords(hours, miniutes) {
+    let outout
+    let time = {
+        '1': 'one', '2': 'two', '3': 'three', '4': 'four', '5': 'five'
+        , '6': 'six', '7': 'seven', '8': 'eight',
+        '9': 'nine', '10': 'ten', '11': 'eleven',
+        '12': 'twelve', '13': 'thirteen', '14': 'fourteen',
+        '15': 'fifteen', '16': 'sixteen', '17': 'seventeen', '18': 'eighteen', '19': 'nineteen', '20': 'twenty', '21':
+            'twenty one', '22': 'twenty two', '23': 'twenty three', '24': 'twenty four',
+        '25': 'twenty five', '26': 'twenty six', '27': 'twenty seven',
+        '28': 'twenty eight', '29': 'twenty nine'
+    }
+    if (miniutes < 30) {
+        if (miniutes == 1) {
+            console.log(1)
+            outout = time[miniutes]+ " minute past " +time[hours]
+
+            return outout
+        }
+        if (miniutes == 15) {
+            
+            console.log('quarter past', time[hours])
+            outout = 'quarter past ' +time[hours]
+
+            return outout
+
+        } else if (miniutes == "00") {
+            console.log(1)
+            outout = time[hours] + " o' clock"
+
+            return outout;
+        }
+
+        else {
+            console.log(1)
+            outout = time[miniutes] + ' minutes past ' + time[hours]
+            console.log(outout)
+            return outout
+        }
+    } else if (miniutes > 30) {
+        console.log(1)
+        if (60 - miniutes == 15) {
+            console.log(1)
+            outout = 'quarter to ' + time[hours + 1]
+            return outout
+        } else {
+            outout = time[60 - miniutes] + ' minutes to ' + time[hours + 1]
+            return outout
+        }
+    } else if (miniutes == 30) {
+        console.log(1)
+        outout = 'half past ' + time[hours]
+        return outout
+    }
+
+}
