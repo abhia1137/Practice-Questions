@@ -14,7 +14,6 @@ class compareTwoTree {
 
     }
 
-
     push(value, which) {
 
         if (!this.root) {

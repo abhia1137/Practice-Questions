@@ -92,7 +92,7 @@ class BinarySearchTree {
             if (node.right) traiverse(node.right)
         }
         traiverse(this.root)
-        console.log("Pre-Ord    er",data)
+        console.log("Pre-Order",data)
         return data
     }
 

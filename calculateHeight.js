@@ -61,36 +61,18 @@ class HeightOfTree {
             }
         }
     }
-
-
-    BFS() {
-        let data = [],
-            queue = [],
-            node = this.root;
-
-        queue.push(this.root);
-        console.log(queue)
-        while (queue.length) {
-            node = queue.shift()
-            data.push(node.value);
-            if (node.left) queue.push(node.left)
-            if (node.right) queue.push(node.right)
-        }
-        console.log(data)
-
-    }
 }
 
 let data = []
 const tree = new HeightOfTree();
-const trees1 = [3,1,4,2,5]
+const trees1 = [20, 10, 30, 5, 40,25,15]
 for (let i = 0; i < trees1.length; i++) {
 
     tree.push(trees1[i], i)
 };
 
 console.log(data[0])
-tree.BFS()
+// tree.BFS()
 
 //     // 10
 // // 5      40
