@@ -1,0 +1,136 @@
+class Graph {
+    constructor() {
+        this.adjancencyList = {}
+    }
+
+    adVertex(vertex) {
+        if (!this.adjancencyList[vertex]) this.adjancencyList[vertex] = []
+    }
+
+    adEdge(v1, v2) {
+        this.adjancencyList[v1].push(v2)
+        this.adjancencyList[v2].push(v1)
+    }
+
+    removeEdge(v1, v2) {
+
+        for (let i = 0; i < this.adjancencyList[v1].length; i++) {
+            if (this.adjancencyList[v1].indexOf(v2) > -1) {
+                this.adjancencyList[v1].splice(this.adjancencyList[v1].indexOf(v2), 1)
+                break
+            }
+
+        }
+
+        if (this.adjancencyList[v2]) {
+            for (let i = 0; i < thlis.adjancencyList[v2].length; i++) {
+                if (this.adjancencyList[v1].indexOf(v2) > -1) {
+                    this.adjancencyList[v2].splice(this.adjancencyList[v2].indexOf(v1), 1)
+                    break
+                }
+            }
+        }
+
+    };
+
+    print() {
+        let sum = 0
+        for (let i = 0; i <= 10; i++) {
+            if (i.toString(2).replace(/0/g, '').length >= 2 && i.toString(2).replace(/0/g, '').length / 2 == 1) {
+                sum += i
+                // console.log(i)
+            }
+        }
+        let num = 32
+        let length = Math.sqrt(num)
+        let total = 1
+
+        for (let i = 0; i < Math.floor(length); i++) {
+            total = total * 2
+        }
+        if (total == num) {
+            console.log('Yes')
+        } else {
+            console.log('No')
+        }
+        // console.log(num.toString(2), (num-1).toString(2))
+        //  console.log(num & (num-1));   
+        // console.log(Math.log(32) == Math.floor(Math.log(32)))
+
+    }
+
+    removeVertex(vertex) {
+
+        for (let i = 0; i < Object.keys(this.adjancencyList).length; i++) {
+            this.removeEdge(Object.keys(this.adjancencyList)[i], vertex)
+            if (Object.keys(this.adjancencyList)[i] == vertex) {
+                delete this.adjancencyList[Object.keys(this.adjancencyList)[i]]
+            }
+
+        }
+    }
+
+
+    removeDuplicateFromString(str) {
+        let newString = str.slice()
+        let anotherString = newString.split('').sort()
+        let newarray = []
+        for (let i = 0; i < newString.split('').length; i++) {
+            if (anotherString[i] != anotherString[i + 1]) {
+                newarray.push(anotherString[i])
+            };
+        };
+        console.log(newarray)
+    };
+
+    // removeDuplicatelogN(str) {
+    //     // console.log(str)
+    //     let newString = str.split('').slice().sort()
+    //     console.log(newString)
+    //     let start = 0
+    //     let end = newString.length - 1;
+    //     let mid = Math.floor(start + end / 2)
+
+
+    //     function divideString(start, mid, newString) {
+    //         console.log(start, mid,newString)
+
+    //         // console.log(newString[start], newString[end], newString[mid])
+    //     }
+        
+
+    //     divideString(start, mid, newString)
+    // }
+
+};
+
+let add = new Graph()
+for (let i = 0; i < 8; i++) {
+    add.adVertex(i.toString())
+}
+// add.removeDuplicateFromString('geeksforgeeks')
+add.removeDuplicatelogN('AbhiA')
+add.adEdge('1', '0')
+add.adEdge('1', '2')
+add.adEdge('0', '3')
+add.adEdge('3', '4')
+add.adEdge('3', '7')
+add.adEdge('3', '7')
+add.adEdge('4', '3')
+add.adEdge('4', '7')
+add.adEdge('4', '6')
+add.adEdge('4', '5')
+
+add.adEdge('5', '6')
+add.adEdge('6', '4')
+
+add.adEdge('6', '7')
+add.adEdge('7', '4')
+// add.adEdge('7', '3')
+add.adEdge('7', '1')
+add.adEdge('7', '6')
+
+
+// add.removeVertex('1')
+// add.removeVertex('0')
+// add.print()
