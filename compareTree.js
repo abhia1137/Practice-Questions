@@ -1,133 +1,79 @@
-class Node {
-    constructor(value) {
-        this.value = value;
-        this.left = null;
-        this.right = null;
-    }
+// let TreeOne = {
+//     val: 1,
+//     // right: null,
+//     // left: { val: 2, right: null, left: null }
+// }
+
+// let TreeTwo = {
+//     val: 1,
+//     // right: { val: 2, right: null, left: null },
+//     // left: null
+// }
+
+
+let TreeOne = {
+    val: 10,
+    right: { val: 15, right: null, left: null },
+    left: { val: 5, right: null, left: null }
+}
+let TreeTwo = {
+    val: 1,
+    right: { val: 2, right: null, left: null },
+    left: { val: null, right: null, left: null }
 }
 
-let tree1
+let data = []
 
-class compareTwoTree {
-    constructor() {
-        this.root = null;
+function DFSInorder(treeOne, treeTwo) {
+    let data = []
+    let newData = []
 
-    }
 
-    push(value, which) {
+    function traiverse(node, type) {
+        if (type == 'one' && node) {
+            data.push(node.val)
+            if (node.left) traiverse(node.left, 'one')
 
-        if (!this.root) {
-            this.root = new Node(value)
-        } else {
-            let current = this.root
-            while (true) {
-                if (current.value > value) {
-                    if (current.left == null) {
-                        current.left = new Node(value);
-                        // console.log(this)
-                        return this
-                    } else {
-                        current = current.left
-                        // console.log(current)
-                    }
-                } else {
-                    if (!current.right) {
-                        current.right = new Node(value);
-                        // console.log(this)
-                        return this
-                    } else {
-                        current = current.right
-
-                    }
-
-                }
-                tree1 = this.root
-                
-
-            }
-
+            if (node.right) traiverse(node.right, 'one')
+        } else if (node) {
+            newData.push(node.val)
+            if (node.left) traiverse(node.left, 'two')
+            if (node.right) traiverse(node.right, 'two')
         }
+    };
+    traiverse(treeOne, 'one')
+    traiverse(treeTwo, 'two')
+    console.log(data, newData)
+    if (data[0] == undefined && newData[0] == undefined) {
+        return true
+    };
 
+    if (data.length != newData.length) {
+        return false
     }
-    
-}
-
-class Node2 {
-    constructor(value) {
-        this.value = value;
-        this.left = null;
-        this.right = null;
-    }
-}
-
-let tree2
-class treeTwo {
-    constructor() {
-        this.root2 = null;
-    }
-        
-    insert(value) {
-            
-        if (!this.root2) {
-            this.root2 = new Node2(value)
-        } else {
-            let current = this.root2
-            while (true) {
-                if (current.value > value) {
-                    if (current.left == null) {
-                        current.left = new Node2(value);
-                        // console.log(this)
-                        return this
-                    } else {
-                        current = current.left
-                        // console.log(current)
-                    }
-                } else {
-                    if (!current.right) {
-                        current.right = new Node2(value);
-                        // console.log(this)
-                        return this
-                    } else {
-                        current = current.right
-
-                    }
-
-                }
-                tree2 = this.root2
-    
-
+    if (TreeOne.right != null && TreeTwo.left != null) {
+        for (let i = 0; i < data.length; i++) {
+            if (data[i] != newData[i]) {
+                return false
             }
-
         }
-    
+    } else {
+        if (data.length == newData.length) {
+            for (let i = 0; i < data.length; i++) {
+                if (data[i] != newData[i]) {
+                    return false
+                }
+            }
+        } else {
+            return false
+        }
     }
-    
 
-    compareTwoTree(){
-   
-        console.log("Tree2",tree2,tree1)
-        
-        
-
-        
-    }
-    
+    return true
 }
 
 
 
 
 
-let tree = new compareTwoTree()
-let trees1 = [10, 5, 40, 1, 7, 50]
-for (let i = 0; i < trees1.length; i++) {
-    tree.push(trees1[i], 'tree1')
-};
-
-
-let check = new treeTwo()
-let trees2 = [10, 5, 40, 1, 7, 50]
-for (let i = 0; i < trees2.length; i++) {
-    check.insert(trees2[i], 'tree2')
-}
-check.compareTwoTree()
+console.log(DFSInorder(TreeOne, TreeTwo))
