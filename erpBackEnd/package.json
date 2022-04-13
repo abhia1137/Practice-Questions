@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "async": "2.6.1",
+    "async": "3.2.2",
     "base64-to-image": "1.0.2",
     "bcrypt": "2.0.1",
     "body-parser": "^1.15.2",
