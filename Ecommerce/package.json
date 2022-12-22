@@ -12,7 +12,7 @@
     "base64-to-image": "1.0.2",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
-    "jsonwebtoken": "8.2.2",
+    "jsonwebtoken": "9.0.0",
     "mongodb": "^2.2.16",
     "mongojs": "2.6.0",
     "nodemailer": "4.6.6",
